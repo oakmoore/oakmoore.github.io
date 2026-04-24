@@ -1,4 +1,22 @@
-/* Reset and base styles */
+/* Base Variables & Reset */
+@font-face {
+    font-family: 'Minion Pro';
+    src: url('../fonts/MinionPro-Semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+:root {
+    --color-cream: #ffffff;
+    --color-dark: #1A1A1A;
+    --color-dark-grey: #2A2A2A;
+    --color-white: #FFFFFF;
+    --color-accent: #8b5a2b; /* Subtle leather/bourbon accent */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+    --font-logo: 'Minion Pro', serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +24,528 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background-color: var(--color-cream);
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 20px;
+    -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-    color: #0056b3;
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Promo Banner */
+.promo-banner {
+    background-color: #362d23;
+    color: var(--color-white);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: var(--color-cream);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-left, .nav-right {
+    flex: 1;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    cursor: pointer;
+    padding: 5px;
+    flex: 1;
+    text-align: left;
+}
+
+.nav-left ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-right ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.nav-left a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-dark);
+    transition: color 0.3s;
+}
+
+.nav-left a:hover {
+    color: var(--color-accent);
+}
+
+.logo {
+    text-align: center;
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.logo a {
+    font-family: var(--font-logo);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.logo a:hover {
+    color: var(--color-accent);
+}
+
+.nav-right a {
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    transition: color 0.3s;
+}
+
+.nav-right a:hover {
+    color: var(--color-accent);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    min-height: 80vh;
+    background-color: var(--color-dark);
+}
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('../assets/barrel-backdrop.jpg') center/cover;
+    color: var(--color-white);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 1rem;
+    margin-bottom: 40px;
+    max-width: 400px;
+    font-weight: 300;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    padding: 15px 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+.hero-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 50%;
+}
+
+.collage-item {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.collage-item.img-1 {
+    background-image: url('../assets/barrel-warehouse.jpg');
+}
+.collage-item.img-2 {
+    background-image: url('../assets/barrel-warehouse.jpg');
+}
+.collage-item.img-3 {
+    background-image: url('../assets/barrel-warehouse.jpg');
+}
+.collage-item.img-4 {
+    background-image: url('../assets/barrel-warehouse.jpg');
+}
+
+/* Collections Section */
+.collections {
+    padding: 80px 40px;
+    background-color: var(--color-cream);
+    text-align: center;
+}
+
+.collections h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+    text-align: left;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.collection-item {
+    text-align: left;
+    cursor: pointer;
+}
+
+.img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 15px;
+    transition: transform 0.5s ease;
+    background-color: var(--color-dark-grey);
+}
+
+.collection-item:hover .img-placeholder {
+    transform: scale(1.02);
+}
+
+.collection-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+/* Collection Backgrounds */
+.collection-item .img-placeholder { background-image: url('https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'); background-color: transparent; }
+
+/* Popular Products Carousel */
+.popular-products {
+    padding: 80px 40px;
+    background-color: var(--color-white);
+    text-align: center;
+}
+
+.popular-products h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    gap: 15px;
+}
+
+.carousel-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-dark-grey);
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s;
+    outline: none;
+}
+
+.carousel-btn:hover {
+    color: var(--color-accent);
+}
+
+.carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    gap: 20px;
+}
+
+.carousel-item {
+    flex: 0 0 calc((100% - 40px) / 3); /* 3 items visible, 2 gaps of 20px */
+    text-align: left;
+    cursor: pointer;
+}
+
+.product-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: var(--color-cream);
+    background-image: url('https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 15px;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item:hover .product-img {
+    transform: scale(1.02);
+}
+
+.carousel-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.carousel-item p {
+    font-size: 1rem;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+/* Companies Section */
+.companies {
+    padding: 80px 40px;
+    background-color: var(--color-white);
+    text-align: center;
+}
+
+.companies h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.companies-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.company-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 80px;
+}
+
+.company-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0.7;
+    filter: grayscale(100%);
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+.company-logo:hover img {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-header { 
+        padding: 15px 20px; 
+        flex-wrap: wrap; 
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-left {
+        display: none;
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .nav-left.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .nav-left ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .logo a {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+
+    .hero { 
+        flex-direction: column; 
+    }
+    
+    .hero-right { 
+        width: 100%;
+        min-height: 50vh; 
+    }
+
+    .hero-left {
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .collection-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+    }
+
+    .carousel-item { 
+        flex: 0 0 calc((100% - 20px) / 2); 
+    } /* 2 items visible */
+    
+    .carousel-wrapper {
+        padding: 0 10px;
+    }
+
+    .companies {
+        padding: 60px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .promo-banner {
+        font-size: 0.65rem;
+        padding: 8px 10px;
+    }
+
+    .main-header {
+        padding: 15px;
+    }
+
+    .nav-left ul {
+        font-size: 0.75rem;
+        gap: 12px;
+    }
+
+    .hero-left {
+        padding: 40px 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+    }
+    
+    .hero-right { 
+        min-height: 40vh; 
+    }
+
+    .collections, .popular-products, .companies {
+        padding: 50px 20px;
+    }
+
+    .collections h2, .popular-products h2, .companies h2 {
+        font-size: 1.8rem;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .collection-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    
+    .carousel-item { 
+        flex: 0 0 100%; 
+    } /* 1 item visible */
+
+    .carousel-btn {
+        font-size: 1.5rem;
+    }
+
+    .companies-grid {
+        gap: 30px;
+    }
+
+    .company-logo {
+        width: 100px;
+        height: 60px;
+    }
 }
