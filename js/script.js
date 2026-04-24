@@ -142,4 +142,95 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCarouselPosition();
         });
     }
+
+    // -------------------------
+    // Mobile Collage Carousel
+    // -------------------------
+    const collage = document.querySelector('.collage');
+    const dots = document.querySelectorAll('.collage-dot');
+
+    if (collage && dots.length > 0) {
+        collage.addEventListener('scroll', () => {
+            // Find which item is currently the most prominent based on scroll left
+            const itemWidth = collage.offsetWidth;
+            const scrollPosition = collage.scrollLeft;
+            const currentIndex = Math.round(scrollPosition / itemWidth);
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+
+        // Auto advanced mobile collage every 4 seconds
+        setInterval(() => {
+            const itemWidth = collage.offsetWidth;
+            const scrollPosition = collage.scrollLeft;
+            let currentIndex = Math.round(scrollPosition / itemWidth);
+            
+            currentIndex++;
+            if (currentIndex >= dots.length) {
+                currentIndex = 0; // Loop back to start
+            }
+            
+            collage.scrollTo({
+                left: currentIndex * itemWidth,
+                behavior: 'smooth'
+            });
+        }, 4000);
+    }
+
+    // -------------------------
+    // Scroll Entrance Animations
+    // -------------------------
+    const animatedElements = document.querySelectorAll('.hero-content, .collection-item, .carousel-item, .popular-products h2, .companies-grid, .footer-section');
+    
+    // Apply starting class to all matched elements immediately
+    animatedElements.forEach(el => el.classList.add('animate-on-scroll'));
+
+    const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Delay the top of the page (hero) to account for initial loading
+                const baseDelay = entry.target.classList.contains('hero-content') ? 400 : 0;
+                
+                // Add staggered delay based on index for simultaneous items
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+
+                    // If it's the companies grid, trigger the rainbow light-up animation
+                    if (entry.target.classList.contains('companies-grid')) {
+                        // Wait 1 second after the grid itself fades in
+                        setTimeout(() => {
+                            const logos = entry.target.querySelectorAll('.company-logo img');
+                            logos.forEach((logo, i) => {
+                                // Stagger the light-up for each logo
+                                setTimeout(() => {
+                                    logo.classList.add('color-flash');
+                                    
+                                    // Turn it back off after 500ms so it cascades
+                                    setTimeout(() => {
+                                        logo.classList.remove('color-flash');
+                                    }, 500); 
+                                }, i * 200); // 200ms delay between each logo starting
+                            });
+                        }, 1000); // 1 second wait
+                    }
+
+                }, baseDelay + (index * 150));
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    });
+
+    animatedElements.forEach(el => animationObserver.observe(el));
+
 });
