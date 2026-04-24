@@ -359,7 +359,7 @@ a {
     background: none;
     border: none;
     font-size: 2rem;
-    color: var(--color-dark-grey);
+    color: white;
     cursor: pointer;
     padding: 10px;
     transition: color 0.3s;
@@ -367,7 +367,7 @@ a {
 }
 
 .carousel-btn:hover {
-    color: var(--color-accent);
+    color: rgb(184, 184, 184);
 }
 
 .carousel-container {
