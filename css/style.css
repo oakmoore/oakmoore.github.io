@@ -430,6 +430,27 @@ a {
     font-weight: 700;
 }
 
+.btn-view {
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px 0;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.btn-view:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
 /* Companies Section */
 .companies {
     padding: 80px 40px;
