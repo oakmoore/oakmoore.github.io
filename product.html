@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oak & Moore | Product Details</title>
+    
+    <!-- iOS Web App / Bookmark App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+    <meta name="apple-mobile-web-app-title" content="O&M">
+    <link rel="apple-touch-icon" href="assets/fav.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/fav.png" type="image/png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        Promotional Placeholder Text: Toggle on/off
+    </div>
+
+    <!-- Navigation -->
+    <header class="main-header">
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav class="nav-left">
+            <ul>
+                <li><a href="index.html">FEATURED</a></li>
+                <li><a href="index.html">SHOP</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">PARTNERS</a></li>
+            </ul>
+        </nav>
+        
+        <div class="logo">
+            <a href="index.html">
+                OAK & MOORE
+            </a>
+        </div>
+
+        <nav class="nav-right">
+            <ul>
+                <li><a href="#"><i class="fas fa-search"></i></a></li>
+                <li><a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Product Overview Section -->
+    <main class="product-overview">
+        <div class="product-container">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img id="main-product-image" src="assets/barrel-lid.webp" alt="Custom Engraved Bourbon Barrel Lid Sign">
+                </div>
+                <div class="thumbnail-list">
+                    <img src="assets/barrel-lid.webp" alt="Thumbnail 1" class="thumbnail active" onclick="changeImage(this)">
+                    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
+                    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+                </div>
+            </div>
+            
+            <div class="product-details">
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> / <a href="#">Shop</a> / <span>Bourbon Barrel Lids</span>
+                </nav>
+                
+                <h1 class="product-title">Custom Engraved Bourbon Barrel Lid Sign</h1>
+                <p class="product-price">$0.00</p>
+                
+                <div class="product-description">
+                    <p>Placeholder Text</p>
+                    <ul>
+                        <li>Feature List</li>
+                        <li>Feature List</li>
+                        <li>Feature List</li>
+                        <li>Feature List</li>
+                    </ul>
+                </div>
+                
+                <form class="add-to-cart-form">
+                    <div class="form-group">
+                        <button type="button" class="btn-primary btn-customize">CUSTOMIZE (REQUIRED)</button>
+                    </div>
+                    
+                    <div class="purchase-actions">
+                        <div class="quantity-selector">
+                            <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
+                            <input type="number" id="qty" value="1" min="1">
+                            <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+                        </div>
+                        <button type="submit" class="btn-primary add-to-cart-btn">ADD TO CART</button>
+                    </div>
+                </form>
+
+                <div class="product-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-truck"></i> <span>Shipping info placeholder</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-undo"></i> <span>Return policy placeholder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <a href="#" class="footer-logo">OAK & MOORE</a>
+                <p class="footer-blurb">Footer Description Text.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Oak & Moore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Inline script for product page specific interactions
+        function changeImage(element) {
+            document.getElementById('main-product-image').src = element.src;
+            let thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function updateQty(change) {
+            let qtyInput = document.getElementById('qty');
+            let currentValue = parseInt(qtyInput.value);
+            let newValue = currentValue + change;
+            if (newValue >= 1) {
+                qtyInput.value = newValue;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -211,11 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 // Stagger the light-up for each logo
                                 setTimeout(() => {
                                     logo.classList.add('color-flash');
-                                    
-                                    // Turn it back off after 500ms so it cascades
-                                    setTimeout(() => {
-                                        logo.classList.remove('color-flash');
-                                    }, 500); 
                                 }, i * 200); // 200ms delay between each logo starting
                             });
                         }, 1000); // 1 second wait
