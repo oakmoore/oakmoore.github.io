@@ -149,6 +149,34 @@
         </div>
     </footer>
 
+    <!-- Customizer Modal -->
+    <div id="customizerModal" class="customizer-modal">
+        <div class="customizer-modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Customize Your Barrel</h2>
+            <p class="modal-subtitle">Upload your design and drag to position it.</p>
+            
+            <div class="customizer-controls">
+                <label for="designUpload" class="btn-upload">
+                    <i class="fas fa-upload"></i> UPLOAD DESIGN
+                </label>
+                <input type="file" id="designUpload" accept="image/*" style="display: none;">
+            </div>
+
+            <div class="customizer-workspace" id="customizerWorkspace">
+                <img src="assets/barrel-lid.webp" alt="Barrel Lid" class="barrel-bg">
+                <div class="draggable-container" id="draggableContainer">
+                    <img id="uploadedDesign" src="" alt="Uploaded Design">
+                    <div class="resize-handle" id="resizeHandle"></div>
+                </div>
+            </div>
+
+            <div class="customizer-actions">
+                <button type="button" class="btn-primary" id="submitDesignBtn">Submit Design</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
     <script>
         // Inline script for product page specific interactions

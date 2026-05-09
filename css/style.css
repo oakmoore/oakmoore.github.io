@@ -43,12 +43,18 @@
     box-sizing: border-box;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: var(--font-body);
     color: var(--color-dark);
     background-color: var(--color-cream);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 a {
@@ -479,8 +485,8 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 80px;
+    width: 90px;
+    height: 60px;
 }
 
 .company-logo img {
@@ -604,12 +610,22 @@ a {
 @media (max-width: 900px) {
     .main-header { 
         padding: 15px 20px; 
-        flex-wrap: wrap; 
         position: relative;
     }
     
     .menu-toggle {
         display: block;
+        flex: 1;
+    }
+
+    .logo {
+        flex: 2;
+        text-align: center;
+    }
+
+    .nav-right {
+        flex: 1;
+        justify-content: flex-end;
     }
     
     .nav-left {
@@ -686,7 +702,35 @@ a {
     }
 
     .main-header {
-        padding: 15px;
+        padding: 10px 15px;
+    }
+
+    .logo a {
+        font-size: 1.3rem;
+    }
+
+    .nav-right ul {
+        gap: 10px;
+    }
+
+    .main-footer {
+        padding: 40px 20px 20px;
+    }
+
+    .footer-container {
+        gap: 25px;
+    }
+
+    .customizer-modal-content {
+        padding: 20px;
+    }
+    
+    .modal-title {
+        font-size: 1.8rem;
+    }
+
+    .customizer-workspace {
+        max-width: 250px;
     }
 
     .nav-left ul {
@@ -737,8 +781,8 @@ a {
     }
 
     .company-logo {
-        width: 100px;
-        height: 60px;
+        width: 75px;
+        height: 45px;
     }
 }
 
@@ -818,16 +862,16 @@ a {
         min-width: 0; 
     }
 
-    /* Organizations fit on one line */
+    /* Organizations fit naturally */
     .companies-grid {
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         gap: 15px;
-        justify-content: space-between;
+        justify-content: center;
     }
     .company-logo {
-        flex: 1 1 0;
-        min-width: 0;
+        flex: 0 1 calc(25% - 15px);
+        min-width: 50px;
         height: auto;
     }
     .company-logo img {
@@ -869,7 +913,8 @@ a {
 
 .product-gallery {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
+    max-width: 100%;
 }
 
 .main-image {
@@ -894,11 +939,14 @@ a {
 .thumbnail-list {
     display: flex;
     gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 5px; /* for scrollbar */
 }
 
 .thumbnail {
     width: 80px;
     height: 80px;
+    flex-shrink: 0;
     object-fit: cover;
     border-radius: 4px;
     cursor: pointer;
@@ -914,7 +962,8 @@ a {
 
 .product-details {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
+    max-width: 100%;
     padding-top: 10px;
 }
 
@@ -1071,20 +1120,71 @@ a {
 }
 
 @media (max-width: 768px) {
+    .product-overview {
+        padding: 20px 15px;
+    }
+    
     .product-container {
         flex-direction: column;
+        gap: 20px;
+    }
+
+    .product-gallery {
+        min-width: 0; 
+        width: 100%;
+    }
+
+    .product-details {
+        min-width: 0;
+        width: 100%;
     }
     
     .product-title {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .product-price {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
     }
     
     .purchase-actions {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .quantity-selector {
+        height: 52px;
+        flex-shrink: 0;
+    }
+
+    .quantity-selector input {
+        width: 40px;
     }
     
+    .qty-btn {
+        width: 35px;
+    }
+
     .add-to-cart-btn {
-        padding: 18px;
+        padding: 0;
+        height: 52px;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-customize {
+        font-size: 1rem;
+        padding: 16px;
     }
 }
 
@@ -1110,5 +1210,167 @@ a {
     background-color: var(--color-accent);
     border-color: var(--color-accent);
     color: var(--color-white);
+}
+
+/* ==================================
+   Customizer Modal
+   ================================== */
+.customizer-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.customizer-modal.show {
+    display: flex;
+}
+
+.customizer-modal-content {
+    background-color: var(--color-cream);
+    padding: 40px;
+    border-radius: 4px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--color-dark);
+    margin-bottom: 5px;
+}
+
+.modal-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-dark-grey);
+    margin-bottom: 25px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--color-dark);
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--color-accent);
+}
+
+.customizer-controls {
+    margin: 0 0 25px 0;
+}
+
+.btn-upload {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: transparent;
+    border: 2px solid var(--color-dark);
+    color: var(--color-dark);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.btn-upload:hover {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+}
+
+.btn-upload i {
+    margin-right: 8px;
+}
+
+.customizer-workspace {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto 30px auto;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15), inset 0 0 20px rgba(0,0,0,0.5);
+    aspect-ratio: 1 / 1;
+    touch-action: none;
+}
+
+.barrel-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.draggable-container {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    cursor: move;
+    border: 1px dashed transparent;
+    border-radius: 50%;
+    display: none;
+    z-index: 2;
+    transform-origin: center center;
+    transition: border-color 0.3s;
+}
+
+.draggable-container:hover {
+    border-color: rgba(255,255,255,0.7);
+}
+
+.draggable-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    pointer-events: none;
+    /* More realistic laser burn effect allowing wood grain to show through */
+    filter: sepia(1) hue-rotate(345deg) brightness(0.2) contrast(1.2);
+    mix-blend-mode: color-burn;
+    opacity: 0.75;
+}
+
+.resize-handle {
+    width: 15px;
+    height: 15px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    right: 15%;
+    cursor: se-resize;
+    z-index: 3;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.customizer-actions .btn-primary {
+    width: 100%;
 }
 

@@ -228,4 +228,156 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animatedElements.forEach(el => animationObserver.observe(el));
 
+    // -------------------------
+    // Customizer Modal Logic
+    // -------------------------
+    const btnCustomize = document.querySelector('.btn-customize');
+    const customizerModal = document.getElementById('customizerModal');
+    const closeModal = document.querySelector('.close-modal');
+    const designUpload = document.getElementById('designUpload');
+    const uploadedDesign = document.getElementById('uploadedDesign');
+    const draggableContainer = document.getElementById('draggableContainer');
+    const submitDesignBtn = document.getElementById('submitDesignBtn');
+    const resizeHandle = document.getElementById('resizeHandle');
+    const customizerWorkspace = document.getElementById('customizerWorkspace');
+
+    if (btnCustomize && customizerModal) {
+        btnCustomize.addEventListener('click', () => {
+            customizerModal.classList.add('show');
+        });
+
+        closeModal.addEventListener('click', () => {
+            customizerModal.classList.remove('show');
+        });
+
+        submitDesignBtn.addEventListener('click', () => {
+            customizerModal.classList.remove('show');
+            btnCustomize.textContent = 'CHANGE DESIGN';
+            btnCustomize.style.backgroundColor = 'var(--color-accent)';
+            btnCustomize.style.borderColor = 'var(--color-accent)';
+        });
+
+        // Close when clicking outside of modal
+        window.addEventListener('click', (e) => {
+            if (e.target === customizerModal) {
+                customizerModal.classList.remove('show');
+            }
+        });
+
+        // Handle Image Upload
+        designUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    uploadedDesign.src = event.target.result;
+                    draggableContainer.style.display = 'block';
+                    
+                    // Reset position and default starting size 
+                    draggableContainer.style.top = '25%';
+                    draggableContainer.style.left = '25%';
+                    draggableContainer.style.width = '50%';
+                    draggableContainer.style.height = '50%';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Dragging Logic
+        let isDragging = false;
+        let startX, startY, initialTop, initialLeft;
+
+        function dragStart(e) {
+            if (e.target === resizeHandle) return; // Ignore if resizing
+            isDragging = true;
+            // Support both touch and mouse
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            
+            startX = clientX;
+            startY = clientY;
+            
+            const rect = draggableContainer.getBoundingClientRect();
+            const parentRect = customizerWorkspace.getBoundingClientRect();
+            
+            initialLeft = rect.left - parentRect.left;
+            initialTop = rect.top - parentRect.top;
+        }
+
+        function dragAction(e) {
+            if (isDragging) {
+                // e.preventDefault(); // Prevent scrolling on mobile while dragging
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+                
+                const dx = clientX - startX;
+                const dy = clientY - startY;
+                draggableContainer.style.left = `${initialLeft + dx}px`;
+                draggableContainer.style.top = `${initialTop + dy}px`;
+            }
+        }
+
+        function dragEnd() {
+            isDragging = false;
+        }
+
+        draggableContainer.addEventListener('mousedown', dragStart);
+        draggableContainer.addEventListener('touchstart', dragStart, {passive: false});
+
+        window.addEventListener('mousemove', dragAction);
+        window.addEventListener('touchmove', dragAction, {passive: false});
+
+        window.addEventListener('mouseup', dragEnd);
+        window.addEventListener('touchend', dragEnd);
+
+        // Resizing Logic
+        let isResizing = false;
+        let startWidth, startHeight;
+
+        if (resizeHandle) {
+            function resizeStart(e) {
+                e.preventDefault(); // Prevent text selection/scrolling
+                e.stopPropagation();
+                isResizing = true;
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+                
+                startX = clientX;
+                startY = clientY;
+                startWidth = draggableContainer.offsetWidth;
+                startHeight = draggableContainer.offsetHeight;
+            }
+
+            function resizeAction(e) {
+                if (isResizing) {
+                    // e.preventDefault(); // Prevent scrolling
+                    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+                    
+                    const dx = clientX - startX;
+                    const dy = clientY - startY;
+                    
+                    // Maintain aspect ratio 1:1
+                    const newSize = Math.max(50, startWidth + Math.max(dx, dy));
+                    
+                    draggableContainer.style.width = `${newSize}px`;
+                    draggableContainer.style.height = `${newSize}px`;
+                }
+            }
+
+            function resizeEnd() {
+                isResizing = false;
+            }
+
+            resizeHandle.addEventListener('mousedown', resizeStart);
+            resizeHandle.addEventListener('touchstart', resizeStart, {passive: false});
+
+            window.addEventListener('mousemove', resizeAction);
+            window.addEventListener('touchmove', resizeAction, {passive: false});
+
+            window.addEventListener('mouseup', resizeEnd);
+            window.addEventListener('touchend', resizeEnd);
+        }
+    }
+
 });
